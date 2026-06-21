@@ -16,12 +16,9 @@ This project uses a Python virtual environment and environment variables for con
 Create a `.env` file in the repository root with:
 
 ```env
-WEATHER_AI_API_KEY=wai_....
-WEATHER_AI_BASE_URL=https://weather-ai.co
-WEATHER_AI_ENDPOINT_PATH=/v1/weather
+cp .env.example .env
 ```
-
-If you want to keep `.env` out of source control, use the existing `.env.example` as a reference.
+Remember to substitute the corret API key
 
 ## Install
 
@@ -32,8 +29,6 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
-
-If you already have the app dependencies installed, ensure `gunicorn` is available in the environment.
 
 ## Run locally
 
