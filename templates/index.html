@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section-grid">
+  <div class="panel">
+    <h2>Start with a city</h2>
+    <p>Use the search panel below to request weather data for any location supported by Weather-AI.</p>
+    <form id="search-form" class="form-grid">
+      <div class="input-row">
+        <div class="field-group">
+          <label for="location">Location</label>
+          <input id="location" class="input-field" type="text" name="location" value="{{ default_location }}" required />
+        </div>
+
+        <div class="field-group">
+          <label for="units">Units</label>
+          <select id="units" class="select-field" name="units">
+            <option value="metric" {% if default_units == 'metric' %}selected{% endif %}>Metric</option>
+            <option value="imperial" {% if default_units == 'imperial' %}selected{% endif %}>Imperial</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="button-primary">Search weather</button>
+    </form>
+  </div>
+
+  <div class="panel">
+    <h2>API response</h2>
+    <pre id="output" class="output-box">Your reliable weather forcast partner</pre>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('search-form');
+  const output = document.getElementById('output');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const params = new URLSearchParams(formData).toString();
+    output.textContent = 'Loading...';
+
+    try {
+      const response = await fetch(`/v1/weather?${params}`);
+      const data = await response.json();
+      output.textContent = JSON.stringify(data, null, 2);
+    } catch (error) {
+      output.textContent = 'Fetch error: ' + error.message;
+    }
+  });
+</script>
+{% endblock %}
