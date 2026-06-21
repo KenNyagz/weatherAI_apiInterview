@@ -44,3 +44,5 @@ Then visit `http://127.0.0.1:5000`.
 - `app.py` — main Flask app entrypoint used for local development and deployment.
 - `templates/` — HTML templates for the web UI.
 - `static/` — CSS and static assets.
+
+Live deployment: https://weather-a-iapi-interview--kennyagz681.replit.app
